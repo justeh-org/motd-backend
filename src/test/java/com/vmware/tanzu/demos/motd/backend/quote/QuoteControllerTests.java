@@ -16,8 +16,6 @@
 
 package com.vmware.tanzu.demos.motd.backend.quote;
 
-import com.vmware.tanzu.demos.motd.backend.quote.DbQuoteHistoryRepository;
-import com.vmware.tanzu.demos.motd.backend.quote.Quote;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,7 +39,7 @@ public class QuoteControllerTests {
     @Autowired
     private TestRestTemplate rest;
     @Autowired
-    private DbQuoteHistoryRepository repo;
+    private QuoteHistoryRepository repo;
 
     @Test
     void getQuote() {

@@ -23,7 +23,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "quote_history")
-class DbQuoteHistory {
+class QuoteHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -69,7 +69,7 @@ class DbQuoteHistory {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DbQuoteHistory that)) return false;
+        if (!(o instanceof QuoteHistory that)) return false;
         return Objects.equals(getId(), that.getId());
     }
 

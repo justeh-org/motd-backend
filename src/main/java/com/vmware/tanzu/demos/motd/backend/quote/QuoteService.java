@@ -26,8 +26,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -36,10 +34,10 @@ class QuoteService {
     private final Random random = new Random();
     private final Logger logger = LoggerFactory.getLogger(QuoteService.class);
     private final QuoteGenerator[] quoteGenerators;
-    private final DbQuoteHistoryRepository repo;
+    private final QuoteHistoryRepository repo;
     private final String source;
 
-    QuoteService(QuoteGenerator[] quoteGenerators, DbQuoteHistoryRepository repo, HikariDataSource dataSource) {
+    QuoteService(QuoteGenerator[] quoteGenerators, QuoteHistoryRepository repo, HikariDataSource dataSource) {
         this.quoteGenerators = quoteGenerators;
         this.repo = repo;
         if (quoteGenerators.length == 0) {
@@ -77,7 +75,7 @@ class QuoteService {
         logger.info("Generating new quote using generator {}: {}", gen.type(), quote.message());
 
         final var today = LocalDate.now();
-        final var dbQuote = repo.findByDateCreated(today).orElseGet(DbQuoteHistory::new);
+        final var dbQuote = repo.findByDateCreated(today).orElseGet(QuoteHistory::new);
         dbQuote.setDateCreated(today);
         dbQuote.setQuoteMessage(quote.message());
         dbQuote.setQuoteSource(quote.source());
